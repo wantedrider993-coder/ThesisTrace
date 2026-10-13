@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="ThesisTrace — financial research workspace. Explore multiple explanations, weigh evidence, understand uncertainty.">
+<meta name="color-scheme" content="light">
+<title>ThesisTrace — Financial Research Workspace</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<!-- Detects file:// and shows a friendly banner (populated by app.js) -->
+<div id="env-banner" class="env-banner hidden" role="alert"></div>
+
+<div class="app-shell">
+
+  <!-- ============ SIDEBAR (desktop) / DRAWER (mobile) ============ -->
+  <aside id="sidebar" class="sidebar" aria-label="Primary navigation">
+    <div class="sidebar-head">
+      <a href="#/dashboard" class="brand" aria-label="ThesisTrace home">
+        <span class="brand-mark" aria-hidden="true">◆</span>
+        <span class="brand-text">
+          <span class="brand-name">ThesisTrace</span>
+          <span class="brand-tag">One problem. More than one way forward.</span>
+        </span>
+      </a>
+      <button id="drawer-close" class="drawer-close" aria-label="Close navigation menu">×</button>
+    </div>
+
+    <nav class="sidebar-nav" role="navigation">
+      <a class="nav-item" href="#/dashboard" data-nav="dashboard">
+        <span class="nav-icon" aria-hidden="true">◫</span><span>Dashboard</span>
+      </a>
+      <a class="nav-item" href="#/companies" data-nav="companies">
+        <span class="nav-icon" aria-hidden="true">⌕</span><span>Company Explorer</span>
+      </a>
+      <a class="nav-item" href="#/compare" data-nav="compare">
+        <span class="nav-icon" aria-hidden="true">⇄</span><span>Compare</span>
+      </a>
+      <a class="nav-item" href="#/research" data-nav="research">
+        <span class="nav-icon" aria-hidden="true">◇</span><span>Research Explorer</span>
+      </a>
+      <a class="nav-item" href="#/workspace" data-nav="workspace">
+        <span class="nav-icon" aria-hidden="true">▤</span><span>My Workspace</span>
+      </a>
+      <a class="nav-item" href="#/learn" data-nav="learn">
+        <span class="nav-icon" aria-hidden="true">✎</span><span>Sample Problems</span>
+      </a>
+      <a class="nav-item" href="#/coverage" data-nav="coverage">
+        <span class="nav-icon" aria-hidden="true">◍</span><span>Data Coverage</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-foot">
+      <p class="small muted">
+        Rule-based analysis. Not investment advice.
+        Data may be provisional until verified against primary sources.
+      </p>
+      <p class="tiny muted" id="sidebar-status">—</p>
+    </div>
+  </aside>
+
+  <div id="scrim" class="scrim" hidden></div>
+
+  <!-- ============ MAIN ============ -->
+  <div class="main-wrap">
+
+    <header class="topbar" role="banner">
+      <button id="drawer-open" class="menu-btn" aria-label="Open navigation menu" aria-controls="sidebar" aria-expanded="false">
+        <span aria-hidden="true">☰</span>
+      </button>
+
+      <form id="quick-search-form" class="quick-search" role="search" autocomplete="off">
+        <label for="quick-search" class="sr-only">Search companies</label>
+        <input id="quick-search" type="search" placeholder="Search companies, tickers, sectors…" aria-describedby="quick-search-hint">
+        <span id="quick-search-hint" class="sr-only">Press slash to focus, Escape to clear</span>
+      </form>
+
+      <div class="topbar-actions">
+        <button id="new-investigation-btn" class="btn btn-teal btn-sm" type="button">+ New investigation</button>
+      </div>
+    </header>
+
+    <main id="main" class="main" tabindex="-1">
+      <div id="view-root" class="view-root" aria-live="polite"></div>
+    </main>
+
+    <footer class="site-foot" role="contentinfo">
+      <div class="foot-grid">
+        <div>
+          <strong>ThesisTrace</strong>
+          <p class="small muted">A research workspace that presents competing explanations, supporting and contradicting evidence, and honest uncertainty. Not investment advice.</p>
+        </div>
+        <div>
+          <p class="small"><strong>Data honesty</strong></p>
+          <p class="small muted">Every figure carries a verification state. “Verified” means checked against a primary source. Nothing else is labeled that way.</p>
+        </div>
+        <div>
+          <p class="small"><strong>Privacy</strong></p>
+          <p class="small muted">No accounts, no tracking, no external calls. Saved research lives only in this browser’s localStorage.</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<!-- Toast container for confirmations -->
+<div id="toasts" class="toasts" aria-live="polite" aria-atomic="true"></div>
+
+<!-- Modal container -->
+<div id="modal-root" class="modal-root" hidden></div>
+
+<script type="module" src="app.js"></script>
+<script>
+  // Detect file:// and warn the user before modules fail silently.
+  if (location.protocol === "file:") {
+    var b = document.getElementById("env-banner");
+    b.classList.remove("hidden");
+    b.innerHTML =
+      '<strong>Opened as a local file.</strong> ' +
+      'ES modules and saved research require a small local web server. ' +
+      'In a terminal in this folder, run: ' +
+      '<code>python3 -m http.server 8000</code> ' +
+      'then open <a href="http://localhost:8000">http://localhost:8000</a>. ' +
+      'See README.md → “Run locally”.';
+  }
+</script>
+
+</body>
+</html>
